@@ -29,3 +29,43 @@ const solve = (a, b, c) => {
         console.log("No roots.Negative discriminant");
     }
 }
+
+const intro = (message, enterData) => {
+    rl.question(message, enterData);
+}
+
+const interactiveNum3 = () => {
+    intro("c = ", (num3) => {
+        c = num3;
+        if (isNaN(c)) {
+            console.log(`Wrong type. Expected a valid real number, got ${c} instead`);
+            interactiveNum3();
+        }
+        rl.close;
+        solve(a, b, c);
+        process.exit(1);
+    });
+}
+
+const interactiveNum2 = () => {
+    intro("b = ", (num2) => {
+        b = num2;
+        if (isNaN(b)) {
+            console.log(`Wrong type. Expected a valid real number, got ${b} instead`);
+            interactiveNum2();
+        }
+        rl.close;
+        interactiveNum3();
+    });
+}
+const interactiveNum1 = () => {
+    intro("a = ", (num1) => {
+        a = num1;
+        if (isNaN(a) || a == 0) {
+            console.log(`Wrong type. Expected a valid real number, got ${a} instead`);
+            interactiveNum1();
+        }
+        rl.close;
+        interactiveNum2();
+    });
+}
