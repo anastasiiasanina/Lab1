@@ -69,3 +69,41 @@ const interactiveNum1 = () => {
         interactiveNum2();
     });
 }
+
+const notInteractive = () => {
+    intro("Enter filename: ", (name) => {
+        fs.readFile(name, () => {
+            if (!name.includes('.txt')) {
+                console.log("Invalid format");
+                process.exit(1);
+            } else if (fs.existsSync(name)) {
+                const fileContent = fs.readFileSync(name, "utf-8");
+                const numbers = fileContent.split(" ");
+                const parsedNum = numbers.map(parseFloat);
+
+                const a = parsedNum[0];
+                const b = parsedNum[1];
+                const c = parsedNum[2];
+
+                if (isNaN(a) || a == 0) {
+                    console.log(`Wrong type. Expected a valid real number, got ${a} instead`);
+                    process.exit(1);
+                }
+                if (isNaN(b)) {
+                    console.log(`Wrong type. Expected a valid real number, got ${b} instead`);
+                    process.exit(1);
+                }
+                if (isNaN(c)) {
+                    console.log(`Wrong type. Expected a valid real number, got ${c} instead`);
+                    process.exit(1);
+                }
+
+                solve(a, b, c);
+                process.exit(1);
+            } else {
+                console.log(`File ${name} doesn't exist`);
+                process.exit(1);
+            }
+        })
+    })
+}
