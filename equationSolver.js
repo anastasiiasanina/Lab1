@@ -107,3 +107,13 @@ const notInteractive = () => {
         })
     })
 }
+
+const chooseMode = () => {
+    rl.question("Choose Interactive(I) or Not interactive(N) mode: ", (mode) => {
+        if (mode === "I") {
+            interactiveNum1();
+        } else notInteractive();
+    })
+}
+
+chooseMode();
